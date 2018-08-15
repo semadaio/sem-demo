@@ -9,7 +9,7 @@ import "https://github.com/semadaio/openzeppelin-solidity/contracts/token/ERC20/
  * @title SEM Token
  * @dev A mintable ERC20 token. Intended to be used for a POC / demo. Can mint, can burn.
  */
-contract SEM is StandardToken {
+contract SEM_mintable is MintableToken {
 
   string public constant name = "SEM Token";
   string public constant symbol = "SEM";
