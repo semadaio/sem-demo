@@ -1,5 +1,7 @@
 pragma solidity ^0.4.24;
 
+// Semada DAO demo.
+
 import "https://github.com/semadaio/openzeppelin-solidity/contracts/token/ERC20/MintableToken.sol";
 
 
