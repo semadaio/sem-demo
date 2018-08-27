@@ -62,6 +62,7 @@ contract SEM_DAO_DEMO is owned, SEM_mintable {
     uint public debatingPeriodInMinutes;
     Proposal[] public proposals;
     uint public numProposals;
+    address public tokenContract; // this implies there is a separate token contract that will be used to stake REP tokens
 
 
 
@@ -183,6 +184,10 @@ contract SEM_DAO_DEMO is owned, SEM_mintable {
         public
         returns (uint voteID)
     {
+    
+    	//stake actual REP tokens
+	require(tokenContract.transferFrom(msg.sender, address(this), NumberOfREPs));
+	
         Proposal storage p = proposals[proposalNumber];
         require(p.voted[msg.sender] != true);
 
@@ -191,12 +196,12 @@ contract SEM_DAO_DEMO is owned, SEM_mintable {
         p.voted[msg.sender] = true;
         p.numberOfVotes = voteID +1;
         
-        // Transfer tokens to betting pool - can be triggered by dapp after the voting is finalized. 
-        // DAO members approve token transfers when they join the DAO.
+
         
+
         
         emit Voted(proposalNumber,  supportsProposal, msg.sender);
-        //emit Staked(proposalNumber, NumberOfREPs, msg.sender);
+        //emit Staked(proposalNumber, NumberOfREPs, msg.sender); // this is a duplicate event, can be deleted.
         return voteID;
     }
 
